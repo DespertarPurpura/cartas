@@ -1,0 +1,84 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  </head>
+  <body>
+    <a-scene mindar-image="imageTargetSrc:./target1.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      
+      <a-assets>
+        <a-asset-item id="Rob" src="./rob_purpura.glb"></a-asset-item>
+       
+        
+        <a-asset-item id="Sara" src="./Sara_purpura.glb"></a-asset-item>
+        
+        <a-asset-item id="Hermano" src="./hermano_purpura.glb"></a-asset-item>
+      
+        <audio id="bg3" src="pop_punk.ogg" preload="auto"></audio>
+        <audio id="bg4" src="Punk.ogg" preload="auto"></audio>
+      
+        <audio id="bg6" src="shoegaze.ogg" preload="auto"></audio>
+      </a-assets>
+
+      <a-camera 
+        position="0 0 0" 
+        look-controls="enabled: true; pointerLockEnabled: false; touchEnabled: true; sensitivity: -710">
+      </a-camera>
+
+      <a-entity mindar-image-target="targetIndex: 0" id="imageTarget1">
+        <a-gltf-model rotation="90 0 90" position="0 0 0" scale="1 1 1" src="#Rob" animation-mixer></a-gltf-model>
+        <a-sound id="audioSource" src="#bg3" autoplay="false" loop="true" position="0 1.5 -3"></a-sound>
+      </a-entity>
+
+    
+     
+      <a-entity mindar-image-target="targetIndex: 3" id="imageTarget4">
+        <a-gltf-model rotation="90 0 90" position="0 0 0" scale="1 1 1" src="#Sara" animation-mixer></a-gltf-model>
+        <a-sound id="audioSource4" src="#bg6" autoplay="false" loop="true" position="0 1.5 -3"></a-sound>
+      </a-entity>
+
+    
+      <a-entity mindar-image-target="targetIndex: 5" id="imageTarget6">
+        <a-gltf-model rotation="90 0 90" position="0 0 0" scale="1 1 1" src="#Hermano" animation-mixer></a-gltf-model>
+        <a-sound id="audioSource6" src="#bg4" autoplay="false" loop="true" position="0 1.5 -3"></a-sound>
+      </a-entity>
+      
+      
+      
+      
+      
+     
+      
+    </a-scene>  
+
+    <script>
+      // Obtener el objetivo de imagen y el audio
+      const imageTarget1 = document.querySelector("#imageTarget1");
+      
+      const imageTarget4 = document.querySelector("#imageTarget4");
+      
+      const imageTarget6 = document.querySelector("#imageTarget6");
+      
+      const audioSource4 = document.querySelector("#audioSource4");
+      
+      const audioSource6 = document.querySelector("#audioSource6");
+
+      // Escuchar el evento de aparición de la imagen y reproducir el audio
+      imageTarget1.addEventListener("targetFound", () => {
+        audioSource.components.sound.playSound();
+      });
+
+
+
+      imageTarget4.addEventListener("targetFound", () => {
+        audioSource4.components.sound.playSound();
+      });
+
+      imageTarget6.addEventListener("targetFound", () => {
+        audioSource6.components.sound.playSound();
+      });
+    </script>
+  </body>
+</html>
